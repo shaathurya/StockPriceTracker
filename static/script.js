@@ -16,8 +16,9 @@ function startUpdateCycle() {
 
 $(document).ready(function () {
     tickers.forEach(function(ticker) {
-        addTickerToGrid();
+        addTickerToGrid(ticker);
     });
+    startUpdateCycle();
     updatePrices();
 
     $('#add-ticker-form').submit(function(e) {
@@ -28,20 +29,20 @@ $(document).ready(function () {
             localStorage.setItem('tickers', JSON.stringify(tickers))
             addTickerToGrid(newTicker);
         }
-        $('new-ticker').value('');
+        $('#new-ticker').val('');
         updatePrices();
-    })
-    $('#tickers-grid').on('click', '.remove-button', function() { // class remove button
+    });
+    
+    $('#tickers-grid').on('click', '.remove-btn', function() { // class remove button
         var tickerToRemove = $(this).data('ticker');
         tickers = tickers.filter(t => t !== tickerToRemove) // keep all other tickers
         localStorage.setItem('tickers', JSON.stringify(tickers))
-        $(`#{tickerToRemove'}`).remove();
+        $(`#${tickerToRemove}`).remove();
     });
-    startUpdateCycle;
 });
 
 function addTickerToGrid(ticker) {
-  $('#ticker-grid').append(`
+  $('#tickers-grid').append(`
     <div id="${ticker}" class="stock-box">
       <h2>${ticker}</h2>
       <p id="${ticker}-price"></p>
