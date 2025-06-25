@@ -76,7 +76,8 @@ function updatePrices() {
                 }
 
                 $(`#${ticker}-price`).text(`$${data.currentPrice.toFixed(2)}`);
-                $(`#${ticker}-pct`).text(`${data.changePercent.toFixed(2)}%`);
+                const pctFormatted = (changePercent >= 0 ? '+' : '') + changePercent.toFixed(2) + '%';
+                $(`#${ticker}-pct`).text(pctFormatted);
                 $(`#${ticker}-price`).removeClass('dark-red red gray green dark-green').addClass(colorClass);
                 $(`#${ticker}-pct`).removeClass('dark-red red gray green dark-green').addClass(colorClass);
                 
